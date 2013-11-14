@@ -2,6 +2,7 @@
 <robot name="testbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <!-- http://answers.ros.org/question/38956/pass-parameters-to-xacro-in-launch-file/ -->
+<xacro:property name="pi" value="3.1415926535897931" />
 <xacro:property name="seg_length" value="0.2" />
 <xacro:property name="seg_width" value="0.15" />
 <xacro:property name="seg_height" value="0.1" />
@@ -12,7 +13,7 @@
         <origin xyz="${length/2} 0 0" rpy="0 0 0" />
         <geometry>
           <!--box size="${length} ${width} ${height}" /-->
-          <mesh filename="package://testbot_description/meshes/cube.dae" scale="${length/2} ${width/2} ${height/2}" />
+          <mesh filename="package://testbot_description/meshes/cube.dae" scale="${length/2} ${width/4} ${height/4}" />
         </geometry>
         <material name="grey_${postfix}">
           <color rgba="0.5 0.5 0.5 1" />
@@ -22,7 +23,7 @@
     <collision>
       <origin xyz="${length/2} 0 0" rpy="0 0 0" />
       <geometry>
-        <box size="${length} ${width} ${height}" />
+        <box size="${length/2} ${width/2} ${height/2}" />
       </geometry>
     </collision>
 
@@ -36,6 +37,46 @@
     </inertial>
   
   </link>
+
+  <!-- This link is just here to provide a visual for the joint --> 
+  <link name="link_joint_${postfix}">
+    <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+        <geometry>
+          <!--box size="${length} ${width} ${height}" /-->
+          <mesh filename="package://testbot_description/meshes/cylinder.dae" scale="${length/4} ${length/4} ${length/4}" />
+        </geometry>
+        <material name="grey_${postfix}">
+          <color rgba="0.5 0.5 0.5 1" />
+        </material>
+    </visual>
+    
+    <!-- Do I need this? Wouldn't want thin things to fall between segments -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${length/3} ${length/3} ${length/3}" />
+      </geometry>
+    </collision>
+
+    <!-- Do I need this? -->
+    <!--inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1.0" />
+        <inertia
+          ixx="1.0" ixy="0.0" ixz="0.0"
+          iyy="1.0" iyz="0.0"
+          izz="1.0" />
+    </inertial-->
+  
+  </link>
+
+  <joint name="joint_link_${postfix}" type="fixed">
+        <parent link="${parent}" />
+        <child link="link_joint_${postfix}" />
+        <origin xyz="${length} 0 0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+  </joint>
 
   <joint name="joint_${postfix}" type="revolute">
         <parent link="${parent}" />
