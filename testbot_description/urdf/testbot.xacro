@@ -11,7 +11,8 @@
     <visual>
         <origin xyz="${length/2} 0 0" rpy="0 0 0" />
         <geometry>
-          <box size="${length} ${width} ${height}" />
+          <!--box size="${length} ${width} ${height}" /-->
+          <mesh filename="package://testbot_description/meshes/cube.dae" scale="${length/2} ${width/2} ${height/2}" />
         </geometry>
         <material name="grey_${postfix}">
           <color rgba="0.5 0.5 0.5 1" />
