@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot name="testbot" xmlns:xacro="https://github.com/lucasw/testbot">
+
+<!-- http://answers.ros.org/question/38956/pass-parameters-to-xacro-in-launch-file/ -->
+<xacro:property name="seg_length" value="0.2" />
+<xacro:property name="seg_width" value="0.15" />
+<xacro:property name="seg_height" value="0.1" />
+
+<link name="base_link" />
+
+<xacro:macro name="segment" params="parent post_fix length width height" />
+  <link name="link_${postfix}">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${length} ${width} ${height}" />
+      </geometry>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${length} ${width} ${height}" />
+        </geometry>
+      </visual>
+   
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1.0" />
+        <inertia
+          ixx="1.0" ixy="0.0" ixz="0.0"
+          iyy="1.0" iyz="0.0"
+          izz="1.0" />
+      </inertial>
+
+      <joint name="joint_${postfix}" type="revolute">
+        <parent link="${parent}" />
+        <child link="link_${parent}" />
+      </joint>
+
+    </collision>
+  </link>
+</xacro:macro>
+
+</robot>
