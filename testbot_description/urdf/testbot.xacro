@@ -9,6 +9,52 @@
 
 <xacro:property name="cyl_div" value="4.0" />
 
+<xacro:macro name="wheel" params="dir parent postfix length width height">
+<!-- the name doesn't actually do anything, was hoping maybe it would
+       allow multiple visuals within the same link -->
+  <link name="link_wheel_${postfix}">
+    <visual name="vis1_${postfix}">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://testbot_description/meshes/cylinder.dae" scale="${length/4} ${length/8} ${length/4}" />
+        </geometry>
+    </visual>
+    <!--visual name="vis2_${postfix}">
+        <origin xyz="0 -${length} 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://testbot_description/meshes/cylinder.dae" scale="${length/4} ${length/8} ${length/4}" />
+        </geometry>
+    </visual-->
+    
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${length/4} ${length/8} ${length/4}" />
+      </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="0.5" />
+        <inertia
+          ixx="1.0" ixy="0.0" ixz="0.0"
+          iyy="1.0" iyz="0.0"
+          izz="1.0" />
+    </inertial>
+  
+  </link>
+
+  <!-- left wheel axle -->
+  <joint name="joint_axle_${postfix}" type="continuous">
+        <parent link="${parent}" />
+        <child link="link_wheel_${postfix}" />
+        <origin xyz="${length/2} ${dir * length/1.8} ${-length/4}" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+        <limit effort="1000.0" velocity="0.5" />
+  </joint>
+
+</xacro:macro>
+
 <xacro:macro name="segment" params="parent postfix length width height">
   <!-- the segment -->
   <link name="link_${postfix}">
@@ -74,6 +120,7 @@
   
   </link>
 
+  <!-- this is just for visual purpose -->
   <joint name="joint_link_${postfix}" type="fixed">
         <parent link="${parent}" />
         <child link="link_joint_${postfix}" />
@@ -81,6 +128,7 @@
         <axis xyz="0 0 1" />
   </joint>
 
+  <!-- this is a functional joint -->
   <joint name="joint_${postfix}" type="revolute">
         <parent link="${parent}" />
         <child link="link_${postfix}" />
@@ -89,44 +137,9 @@
         <limit effort="1000.0" lower="-0.5" upper="0.5" velocity="0.5" />
   </joint>
 
-  <!-- left wheel axle, put in macro -->
-  <joint name="joint_axle_${postfix}" type="continuous">
-        <parent link="link_${postfix}" />
-        <child link="link_wheel_${postfix}" />
-        <origin xyz="${length/2} ${length/1.8} ${-length/4}" rpy="0 0 0" />
-        <axis xyz="0 1 0" />
-        <limit effort="1000.0" velocity="0.5" />
-  </joint>
-
   <!-- left wheel, put in macro -->
-  <link name="link_wheel_${postfix}">
-    <visual>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <geometry>
-          <!--box size="${length} ${width} ${height}" /-->
-          <mesh filename="package://testbot_description/meshes/cylinder.dae" scale="${length/4} ${length/8} ${length/4}" />
-        </geometry>
-    </visual>
-    
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <box size="${length/4} ${length/8} ${length/4}" />
-      </geometry>
-    </collision>
-
-    <inertial>
-        <origin xyz="0 0 0" rpy="0 0 0" />
-        <mass value="0.5" />
-        <inertia
-          ixx="1.0" ixy="0.0" ixz="0.0"
-          iyy="1.0" iyz="0.0"
-          izz="1.0" />
-    </inertial>
-  
-  </link>
-
-
+  <xacro:wheel parent="link_${postfix}" postfix="right_${postfix}" dir="1.0" length="${length}" width="${width}" height="${height}"  />
+  <xacro:wheel parent="link_${postfix}" postfix="left_${postfix}" dir="-1.0" length="${length}" width="${width}" height="${height}"  />
 
 </xacro:macro>
 
