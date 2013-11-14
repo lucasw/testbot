@@ -10,6 +10,7 @@
 <xacro:property name="cyl_div" value="4.0" />
 
 <xacro:macro name="segment" params="parent postfix length width height">
+  <!-- the segment -->
   <link name="link_${postfix}">
     <visual>
         <origin xyz="${length/2} 0 0" rpy="0 0 0" />
@@ -49,7 +50,7 @@
           <mesh filename="package://testbot_description/meshes/cylinder.dae" scale="${length/cyl_div} ${0.5 * length/cyl_div} ${length/cyl_div}" />
         </geometry>
         <material name="grey_${postfix}">
-          <color rgba="0.5 0.5 0.5 1" />
+          <color rgba="0.3 0.3 0.3 1" />
         </material>
     </visual>
     
@@ -87,6 +88,45 @@
         <axis xyz="0 0 1" />
         <limit effort="1000.0" lower="-0.5" upper="0.5" velocity="0.5" />
   </joint>
+
+  <!-- left wheel axle, put in macro -->
+  <joint name="joint_axle_${postfix}" type="continuous">
+        <parent link="link_${postfix}" />
+        <child link="link_wheel_${postfix}" />
+        <origin xyz="${length/2} ${length/1.8} ${-length/4}" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+        <limit effort="1000.0" velocity="0.5" />
+  </joint>
+
+  <!-- left wheel, put in macro -->
+  <link name="link_wheel_${postfix}">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <!--box size="${length} ${width} ${height}" /-->
+          <mesh filename="package://testbot_description/meshes/cylinder.dae" scale="${length/4} ${length/8} ${length/4}" />
+        </geometry>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="${length/4} ${length/8} ${length/4}" />
+      </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="0.5" />
+        <inertia
+          ixx="1.0" ixy="0.0" ixz="0.0"
+          iyy="1.0" iyz="0.0"
+          izz="1.0" />
+    </inertial>
+  
+  </link>
+
+
 
 </xacro:macro>
 
