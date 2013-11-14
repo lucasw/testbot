@@ -7,8 +7,6 @@ Panels:
         - /Global Options1
         - /Status1
         - /TF1
-        - /TF1/Status1
-        - /TF1/Tree1/base_link1
         - /RobotModel1
       Splitter Ratio: 0.5
     Tree Height: 540
@@ -145,17 +143,17 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.11287
+      Distance: 1.58022
       Focal Point:
         X: 0.348082
         Y: -0.0531795
         Z: 0.0195186
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.509796
+      Pitch: 0.894796
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.9804
+      Yaw: 1.4504
     Saved: ~
 Window Geometry:
   Displays:
