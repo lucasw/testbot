@@ -5,5 +5,5 @@
     <param name="use_gui" value="true" />
   </node>
   <node name="robot_state_publisher1" pkg="robot_state_publisher" type="robot_state_publisher" />
-  <node name="rviz1" pkg="rviz" type="rviz" />
+  <node name="rviz1" pkg="rviz" type="rviz" args="-d $(find testbot_description)/launch/testbot_description.rviz" />
 </launch>
