@@ -29,13 +29,13 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <box size="${length/4} ${length/8} ${length/4}" />
+        <cylinder length="${length/4}" radius="${length/4}" />
       </geometry>
     </collision>
 
     <inertial>
         <origin xyz="0 0 0" rpy="0 0 0" />
-        <mass value="0.5" />
+        <mass value="2" />
         <inertia
           ixx="1.0" ixy="0.0" ixz="0.0"
           iyy="1.0" iyz="0.0"
@@ -78,7 +78,7 @@
 
     <inertial>
         <origin xyz="${length/2} 0 0" rpy="0 0 0" />
-        <mass value="1.0" />
+        <mass value="20.0" />
         <inertia
           ixx="1.0" ixy="0.0" ixz="0.0"
           iyy="1.0" iyz="0.0"
@@ -86,6 +86,11 @@
     </inertial>
   
   </link>
+
+  <gazebo reference="link_${postfix}">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
 
   <!-- This link is just here to provide a visual for the joint --> 
   <link name="link_joint_${postfix}">
@@ -104,7 +109,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <box size="${length/3} ${length/3} ${length/3}" />
+        <cylinder length="${0.5 * length/cyl_div}" radius="${length/cyl_div" />
       </geometry>
     </collision>
 
@@ -128,20 +133,39 @@
         <axis xyz="0 0 1" />
   </joint>
 
-  <!-- this is a functional joint -->
+  <!-- this is a functional joint between segments -->
   <joint name="joint_${postfix}" type="revolute">
         <parent link="${parent}" />
         <child link="link_${postfix}" />
         <origin xyz="${length} 0 0" rpy="0 0 0" />
         <axis xyz="0 0 1" />
         <limit effort="1000.0" lower="-0.5" upper="0.5" velocity="0.5" />
+        <dynamics damping="0.5" />
   </joint>
+
+  <transmission name="tran_joint_seg_${postfix}">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="joint_${postfix}" />
+    <actuator name="motor_seg_${postfix}">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
 
   <!-- left wheel, put in macro -->
   <xacro:wheel parent="link_${postfix}" postfix="right_${postfix}" dir="1.0" length="${length}" width="${width}" height="${height}"  />
   <xacro:wheel parent="link_${postfix}" postfix="left_${postfix}" dir="-1.0" length="${length}" width="${width}" height="${height}"  />
 
 </xacro:macro>
+
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <!-- will default to robot name -->
+    <!--robotNamespace>/testbot</robotNamespace-->
+    <!-- TBD rename this later -->
+    <robotParam>/robot_description</robotparam>
+  </plugin>
+</gazebo>
 
 <link name="base_link" />
 
