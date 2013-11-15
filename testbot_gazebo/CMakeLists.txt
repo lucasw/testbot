@@ -1,13 +1,10 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(testbot_gazebo_control)
+project(testbot_gazebo)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS
-  #ros_control
-  #ros_controllers
-)
+find_package(catkin REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -80,8 +77,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES testbot_gazebo_control
-#  CATKIN_DEPENDS ros_control ros_controllers
+#  LIBRARIES testbot_gazebo
+#  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
 
@@ -92,24 +89,21 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
 
 ## Declare a cpp library
-# add_library(testbot_gazebo_control
-#   src/${PROJECT_NAME}/testbot_gazebo_control.cpp
+# add_library(testbot_gazebo
+#   src/${PROJECT_NAME}/testbot_gazebo.cpp
 # )
 
 ## Declare a cpp executable
-# add_executable(testbot_gazebo_control_node src/testbot_gazebo_control_node.cpp)
+# add_executable(testbot_gazebo_node src/testbot_gazebo_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(testbot_gazebo_control_node testbot_gazebo_control_generate_messages_cpp)
+# add_dependencies(testbot_gazebo_node testbot_gazebo_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(testbot_gazebo_control_node
+# target_link_libraries(testbot_gazebo_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -128,7 +122,7 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS testbot_gazebo_control testbot_gazebo_control_node
+# install(TARGETS testbot_gazebo testbot_gazebo_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -153,7 +147,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_testbot_gazebo_control.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_testbot_gazebo.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
