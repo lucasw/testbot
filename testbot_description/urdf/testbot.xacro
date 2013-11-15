@@ -163,7 +163,7 @@
     <!-- will default to robot name -->
     <!--robotNamespace>/testbot</robotNamespace-->
     <!-- TBD rename this later -->
-    <robotParam>/robot_description</robotparam>
+    <robotParam>/robot_description</robotParam>
   </plugin>
 </gazebo>
 
