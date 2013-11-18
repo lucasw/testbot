@@ -174,7 +174,7 @@
 <link name="base_link" />
 
 <xacro:segment parent="base_link" postfix="1" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
-     <xacro:segment parent="link_1" postfix="2" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
+<xacro:segment parent="link_1" postfix="2" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
 <xacro:segment parent="link_2" postfix="3" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
 <xacro:segment parent="link_3" postfix="4" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
 <!--
