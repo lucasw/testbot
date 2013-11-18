@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   <!-- TBD put in namespace -->
-  <rosparam file="${find testbot_gazebo_control)/config/testbot.yaml" command="load" />
+  <rosparam file="$(find testbot_gazebo_control)/config/testbot.yaml" command="load" />
 
   <!-- the number of joints is hardcoded here, any way to link it to number of joints in xacro file?  Should be able to load all the args from a different file -->
   <node name="controller_spawner_gazebo" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/testbot" args="joint_state_controller
