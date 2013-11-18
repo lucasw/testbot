@@ -5,10 +5,10 @@
 
   <!-- the number of joints is hardcoded here, any way to link it to number of joints in xacro file?  Should be able to load all the args from a different file -->
   <node name="controller_spawner_gazebo" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/testbot" args="joint_state_controller
-      joint_1_position_controller
-      joint_2_position_controller
-      joint_3_position_controller
-      joint_4_position_controller
+      joint_seg_1_position_controller
+      joint_seg_2_position_controller
+      joint_seg_3_position_controller
+      joint_seg_4_position_controller
       " />
 
   <node name="robot_state_publisher_gazebo" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">

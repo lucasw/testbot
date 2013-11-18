@@ -92,7 +92,8 @@
     <mu2>0.2</mu2>
   </gazebo>
 
-  <!-- This link is just here to provide a visual for the joint --> 
+  <!-- This link is just here to provide a visual for the joint -->
+  <xacro:if value="false">
   <link name="link_jointviz_${postfix}">
     <visual>
         <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
@@ -124,7 +125,7 @@
     </inertial-->
   
   </link>
-
+  
   <!-- this is just for visual purpose -->
   <joint name="joint_linkviz_${postfix}" type="fixed">
         <parent link="${parent}" />
@@ -132,9 +133,10 @@
         <origin xyz="${length} 0 0" rpy="0 0 0" />
         <axis xyz="0 0 1" />
   </joint>
+  </xacro:if>
 
   <!-- this is a functional joint between segments -->
-  <joint name="joint_${postfix}" type="revolute">
+  <joint name="joint_seg_${postfix}" type="revolute">
         <parent link="${parent}" />
         <child link="link_${postfix}" />
         <origin xyz="${length} 0 0" rpy="0 0 0" />
@@ -145,16 +147,18 @@
 
   <transmission name="tran_joint_seg_${postfix}">
     <type>transmission_interface/SimpleTransmission</type>
-    <joint name="joint_${postfix}" />
+    <joint name="joint_seg_${postfix}" />
     <actuator name="motor_seg_${postfix}">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
 
-  <!-- left wheel, put in macro -->
+  <!-- wheels -->
+  <xacro:if value="false">
   <xacro:wheel parent="link_${postfix}" postfix="right_${postfix}" dir="1.0" length="${length}" width="${width}" height="${height}"  />
   <xacro:wheel parent="link_${postfix}" postfix="left_${postfix}" dir="-1.0" length="${length}" width="${width}" height="${height}"  />
+  </xacro:if>
 
 </xacro:macro>
 

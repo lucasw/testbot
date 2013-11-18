@@ -5,28 +5,28 @@ testbot:
     publish_rate: 25
 
   # Position controllers
-  joint_1_position_controller:
+  joint_seg_1_position_controller:
     type: effort_controllers/JointPositionController
     # a xacro like file to generate this would be nice TBD
-    joint: joint_1
+    joint: joint_seg_1
     # need to have a space between : and value
     pid: {p: 100.0, i: 0.01, d: 10.0}
 
-  joint_2_position_controller:
+  joint_seg_2_position_controller:
     type: effort_controllers/JointPositionController
     # a xacro like file to generate this would be nice TBD
-    joint: joint_2
+    joint: joint_seg_2
     pid: {p: 100.0, i: 0.01, d: 10.0}
 
-  joint_3_position_controller:
+  joint_seg_3_position_controller:
     type: effort_controllers/JointPositionController
     # a xacro like file to generate this would be nice TBD
-    joint: joint_3
+    joint: joint_seg_3
     pid: {p: 100.0, i: 0.01, d: 10.0}
 
-  joint_4_position_controller:
+  joint_seg_4_position_controller:
     type: effort_controllers/JointPositionController
     # a xacro like file to generate this would be nice TBD
-    joint: joint_4
+    joint: joint_seg_4
     pid: {p: 100.0, i: 0.01, d: 10.0}
 

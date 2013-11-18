@@ -23,11 +23,12 @@
   <param name="robot_description"
 	 command="$(find xacro)/xacro.py '$(find testbot_description)/urdf/testbot.xacro'" />
 
+  <include file="$(find testbot_gazebo_control)/launch/testbot_gazebo_control.launch" />
+
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
 	args="-urdf -model testbot -param robot_description"/>
 
   <!-- ros_control testbot launch file -->
-  <include file="$(find testbot_gazebo_control)/launch/testbot_gazebo_control.launch" />
 
 </launch>
