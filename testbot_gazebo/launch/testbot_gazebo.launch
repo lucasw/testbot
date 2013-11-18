@@ -20,6 +20,7 @@
   </include>
 
   <!-- Load the URDF into the ROS Parameter Server -->
+  <group ns="testbot">
   <group if="true">
   <param name="robot_description"
 	 command="$(find xacro)/xacro.py '$(find testbot_description)/urdf/testbot.xacro'" />
@@ -38,4 +39,5 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
 	  args="-urdf -model testbot -z 0.5 -file $(find testbot_description)/urdf/testbot.urdf"/>
   </group>
+  </group> 
 </launch>

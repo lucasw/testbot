@@ -165,9 +165,9 @@
 <gazebo>
   <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
     <!-- will default to robot name -->
-    <!--robotNamespace>/testbot</robotNamespace-->
+    <robotNamespace>/testbot</robotNamespace>
     <!-- TBD rename this later -->
-    <robotParam>/robot_description</robotParam>
+    <robotParam>/testbot/robot_description</robotParam>
   </plugin>
 </gazebo>
 
