@@ -167,13 +167,47 @@
     <!-- will default to robot name -->
     <robotNamespace>/testbot</robotNamespace>
     <!-- TBD rename this later -->
+    <!--robotParam>/robot_description</robotParam-->
     <robotParam>/testbot/robot_description</robotParam>
   </plugin>
 </gazebo>
 
-<link name="base_link" />
+<link name="base_link"/>
 
-<xacro:segment parent="base_link" postfix="1" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
+<link name="head">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://testbot_description/meshes/cylinder.dae" scale="${seg_length/3} ${seg_length/6} ${seg_length/3}" />
+        </geometry>
+    </visual>
+   
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="${seg_length/6}" radius="${seg_length/3}" />
+      </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1" />
+        <inertia
+          ixx="1.0" ixy="0.0" ixz="0.0"
+          iyy="1.0" iyz="0.0"
+          izz="1.0" />
+    </inertial>
+
+</link>
+ 
+  <joint name="joint_base_head" type="fixed">
+        <parent link="base_link" />
+        <child link="head" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <axis xyz="0 0 1" />
+  </joint>
+  
+<xacro:segment parent="head" postfix="1" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
 <xacro:segment parent="link_1" postfix="2" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
 <xacro:segment parent="link_2" postfix="3" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
 <xacro:segment parent="link_3" postfix="4" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
