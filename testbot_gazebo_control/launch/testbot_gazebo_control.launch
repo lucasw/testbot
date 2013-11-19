@@ -3,17 +3,18 @@
   <!-- TBD put in namespace -->
   <rosparam file="$(find testbot_gazebo_control)/config/testbot.yaml" command="load" />
 
-  <group ns="testbot">
   <!-- the number of joints is hardcoded here, any way to link it to number of joints in xacro file?  Should be able to load all the args from a different file -->
-  <node name="controller_spawner_gazebo" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="testbot" args="joint_state_controller
+  <!-- this only seems to look for robot_description at /, not within the current namespace
+       or the paramater specified lik ns="testbot"  -->
+  <node name="controller_spawner_gazebo" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller
       joint_seg_1_position_controller
       joint_seg_2_position_controller
       joint_seg_3_position_controller
       joint_seg_4_position_controller
-      " />
+      " >
+   </node>
 
   <node name="robot_state_publisher_gazebo" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
     <remap from="/joint_states" to="/testbot/joint_states" />
   </node>
-  </group>
 </launch>

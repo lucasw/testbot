@@ -2,7 +2,7 @@
 <launch>
 
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
-  <arg name="paused" default="false"/>
+  <arg name="paused" default="true"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
@@ -20,17 +20,15 @@
   </include>
 
   <!-- Load the URDF into the ROS Parameter Server -->
+  <!-- can't seem to put these inside a namespace, the controller manager won't find robot_description 
+       -->
+ <param name="robot_description"
+	 command="$(find xacro)/xacro.py '$(find testbot_description)/urdf/testbot.xacro'" />
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+       args="-urdf -model testbot -z 2 -param robot_description"/>
+  <group ns="testbot">
   <group if="true">
   
-  
-  <group ns="testbot">
-  <param name="robot_description"
-	 command="$(find xacro)/xacro.py '$(find testbot_description)/urdf/testbot.xacro'" />
-  
-  
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-       args="-urdf -model testbot -z 1 -param robot_description"/>
-  </group>
   
   <!-- ros_control testbot launch file -->
   <include file="$(find testbot_gazebo_control)/launch/testbot_gazebo_control.launch" />
@@ -40,10 +38,9 @@
   <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
   <group if="false">
   
-  <group ns="testbot">
     <!-- this block doesn't work because gazebo_ros_control is still  waiting for robot_description -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
 	  args="-urdf -model testbot -z 0.5 -file $(find testbot_description)/urdf/testbot.urdf"/>
-  </group> 
+  </group>
   </group>
 </launch>
