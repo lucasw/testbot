@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+<include file="$(find gazebo_ros)/launch/empty_world.launch">
+  <arg name="world_name" value="$(find projector_test)/worlds/test.world"/>
+</include>
+
+
+
+<param name="robot_description"
+textfile="$(find projector_test)/urdf/projector_test.urdf"
+/>
+
+<node name="projector_test_urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+    respawn="false" output="screen"
+    args="-urdf -model projector_test -param robot_description" />
+
+</launch>
