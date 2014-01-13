@@ -6,10 +6,13 @@
 </include>
 
 
-
+<!--
 <param name="robot_description"
 textfile="$(find projector_test)/urdf/projector_test.urdf"
 />
+-->
+<param name="robot_description"
+    command="$(find xacro)/xacro.py '$(find projector_test)/urdf/projector_test.xacro'" />
 
 <node name="projector_test_urdf_spawner" pkg="gazebo_ros" type="spawn_model"
     respawn="false" output="screen"
