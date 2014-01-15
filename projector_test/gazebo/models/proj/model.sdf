@@ -22,8 +22,10 @@
         </visual>
         <projector name="texture_projector">
           <pose>0 0 0 0 0 0</pose>
-        <!--texture>test_pattern.png</texture-->
-        <texture>stereo_projection_pattern_high_res_red.png</texture>
+        <!-- set GAZEBO_RESOURCE_PATH to point to this (have it within media/materials/textures subdir  -->
+        <texture>test_pattern.png</texture>
+        <!-- this works because it is in /usr/share/gazebo-1.9/media/materials/textures/ -->
+        <!--texture>stereo_projection_pattern_high_res_red.png</texture-->
           <fov>0.959931088597</fov>
           <near_clip>0.1</near_clip>
           <far_clip>10</far_clip>
