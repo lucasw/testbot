@@ -69,7 +69,7 @@
 </link>
 
 <joint name="joint_projector" type="fixed">
-  <origin xyz="0 0 2.0" rpy="0.0 0 0" />
+  <origin xyz="0 0 2.0" rpy="-0.77 0 0" />
   <parent link="world" />
   <child link="link_projector" />
 </joint>
@@ -79,9 +79,11 @@
   <projector name="projector_test1">
     <pose>0 0 0 0 0 0</pose>
     <!-- this isn't getting loaded properly -->
-    <texture>$(find projector_test)/urdf/test_pattern.png</texture>
+    <!--texture>$(find projector_test)/urdf/test_pattern.png</texture-->
+    <!-- this doesn't work even with setting GAZEBO_RESOURCE_PATH -->
     <!--texture>test_pattern.png</texture-->
-    <fov>0.6</fov>
+    <texture>stereo_projection_pattern_high_res_red.png</texture>
+    <fov>0.95</fov>
     <near_clip>0.1</near_clip>
     <far_clip>10.0</far_clip>
   </projector>
