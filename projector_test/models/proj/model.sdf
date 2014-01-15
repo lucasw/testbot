@@ -1,29 +1,5 @@
 <?xml version="1.0" ?>
 <sdf version="1.4">
-
-  <world name="default">
-
-    <!-- #903 -->
-    <!--physics type='bullet'-->
-    <physics type='ode'>
-      <max_step_size>0.001</max_step_size>
-      <!-- slow simulation -->
-      <!--
-      <real_time_update_rate>150</real_time_update_rate>
-      -->
-      <real_time_update_rate>1000</real_time_update_rate>  <!-- fast simulation -->
-      <gravity>0 0 -9.8</gravity>
-    </physics>
-
-    <include>
-      <uri>model://ground_plane</uri>
-    </include>
-
-    <!-- Global light source -->
-    <include>
-      <uri>model://sun</uri>
-    </include>
-    
     <model name="projector_model">
       <pose>0 0 1 0.0 0.0 0</pose>
       <link name="projector_link">
@@ -46,7 +22,8 @@
         </visual>
         <projector name="texture_projector">
           <pose>0 0 0 0 0 0</pose>
-          <texture>test_pattern.png</texture>
+        <!--texture>test_pattern.png</texture-->
+        <texture>stereo_projection_pattern_high_res_red.png</texture>
           <fov>0.959931088597</fov>
           <near_clip>0.1</near_clip>
           <far_clip>10</far_clip>
@@ -55,5 +32,4 @@
       <static>true</static>
     </model>
 
-  </world>
 </sdf>

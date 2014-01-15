@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+
+  <world name="default">
+
+    <!-- #903 -->
+    <!--physics type='bullet'-->
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <!-- slow simulation -->
+      <!--
+      <real_time_update_rate>150</real_time_update_rate>
+      -->
+      <real_time_update_rate>1000</real_time_update_rate>  <!-- fast simulation -->
+      <gravity>0 0 -9.8</gravity>
+    </physics>
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- Global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+  </world>
+</sdf>
