@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 <sdf version="1.4">
+    <!-- TBD add a few walls to capture where projector is projecting -->
     <model name="projector_model">
       <pose>0 0 1 0.0 0.0 0</pose>
       <link name="projector_link">
@@ -21,7 +22,7 @@
           </material>
         </visual>
         <projector name="texture_projector">
-          <pose>0 0 0 0 0 0</pose>
+          <pose>0 0 0 0 0.75 0</pose>
         <!-- set GAZEBO_RESOURCE_PATH to point to this (have it within media/materials/textures subdir  -->
         <texture>test_pattern.png</texture>
         <!-- this works because it is in /usr/share/gazebo-1.9/media/materials/textures/ -->
