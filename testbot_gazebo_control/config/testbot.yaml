@@ -24,9 +24,9 @@
     joint: joint_seg_3
     pid: {p: 100.0, i: 0.01, d: 10.0}
 
-  joint_seg_4_position_controller:
-    type: effort_controllers/JointPositionController
-    # a xacro like file to generate this would be nice TBD
-    joint: joint_seg_4
-    pid: {p: 100.0, i: 0.01, d: 10.0}
-
+#  joint_seg_4_position_controller:
+#    type: effort_controllers/JointPositionController
+#    # a xacro like file to generate this would be nice TBD
+#    joint: joint_seg_4
+#    pid: {p: 100.0, i: 0.01, d: 10.0}
+#

@@ -10,9 +10,9 @@
       joint_seg_1_position_controller
       joint_seg_2_position_controller
       joint_seg_3_position_controller
-      joint_seg_4_position_controller
       " >
    </node>
+      <!-- joint_seg_4_position_controller -->
 
   <node name="robot_state_publisher_gazebo" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
     <remap from="/joint_states" to="/testbot/joint_states" />

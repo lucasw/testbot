@@ -2,7 +2,7 @@
 <launch>
 
   <!-- these are the arguments you can pass this launch file, for example paused:=true -->
-  <arg name="paused" default="true"/>
+  <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
@@ -25,7 +25,7 @@
  <param name="robot_description"
 	 command="$(find xacro)/xacro.py '$(find testbot_description)/urdf/testbot.xacro'" />
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-       args="-urdf -model testbot -z 2 -param robot_description"/>
+       args="-urdf -model testbot -z 0.5 -param robot_description"/>
   <group ns="testbot">
   <group if="true">
   
