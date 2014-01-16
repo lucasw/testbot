@@ -243,12 +243,43 @@
   </projector>
 </gazebo>
 
+<joint name="joint_projector_test_1" type="fixed">
+  <parent link="head" />
+  <child link="link_projector_test_1" />
+  <origin xyz="0 0.23 0" rpy="0 0 0" />
+<!--  <axis xyz="0 1 0" />
+  <limit effort="1000.0" upper="0.0001" lower="-0.0001" velocity="0.5" />
+</joint>
+-->
 <!-- this works fine because it is attached to a revolute jointed link-->
-<!--link name="link_projector_test_1">
-</link-->
-<gazebo reference="link_1">
+<link name="link_projector_test_1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.05 0.05 0.05"/>     
+      </geometry>
+    </visual>
+   
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.05 0.05 0.05"/>     
+      </geometry>
+    </collision>
+
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="1" />
+        <inertia
+          ixx="1.0" ixy="0.0" ixz="0.0"
+          iyy="1.0" iyz="0.0"
+          izz="1.0" />
+    </inertial>
+</link>
+
+<gazebo reference="link_projector_test_1">
   <projector name="projector_test_1">
-    <pose>${seg_length/2} 0 0 1.57 0 0</pose>
+    <pose>0 0 0 1.57 0 0</pose>
     <texture>test_pattern.png</texture>
     <!--texture>stereo_projection_pattern_high_res_red.png</texture-->
     <fov>0.95</fov>
