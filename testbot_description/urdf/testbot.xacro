@@ -231,13 +231,10 @@
         <origin xyz="0 0 0" rpy="0 0 0" />
   </joint>
 
+<!-- this one doesn't work correctly because it is attached to a fixed link -->
 <gazebo reference="head">
-  <!--sensor type="projector" name="projector_tester"-->
-  <projector name="projector_test1">
-    <pose>0 0 0 0 0 0</pose>
-    <!-- this isn't getting loaded properly -->
-    <!--texture>$(find projector_test)/urdf/test_pattern.png</texture-->
-    <!-- this doesn't work even with setting GAZEBO_RESOURCE_PATH -->
+  <projector name="projector_test_head">
+    <pose>${seg_length/2} 0 0 1.57 0 0</pose>
     <texture>test_pattern.png</texture>
     <!--texture>stereo_projection_pattern_high_res_red.png</texture-->
     <fov>0.95</fov>
@@ -246,6 +243,19 @@
   </projector>
 </gazebo>
 
+<!-- this works fine because it is attached to a revolute jointed link-->
+<!--link name="link_projector_test_1">
+</link-->
+<gazebo reference="link_1">
+  <projector name="projector_test_1">
+    <pose>${seg_length/2} 0 0 1.57 0 0</pose>
+    <texture>test_pattern.png</texture>
+    <!--texture>stereo_projection_pattern_high_res_red.png</texture-->
+    <fov>0.95</fov>
+    <near_clip>0.1</near_clip>
+    <far_clip>10.0</far_clip>
+  </projector>
+</gazebo>
   
 <xacro:segment parent="head" postfix="1" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
 <xacro:segment parent="link_1" postfix="2" length="${seg_length}" width="${seg_width}" height="${seg_height}" />
