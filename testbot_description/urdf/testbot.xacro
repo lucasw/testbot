@@ -245,14 +245,12 @@
 </gazebo>
 
 <!-- try putting a projector onto another link -->
-<joint name="joint_projector_test_1" type="fixed">
+<joint name="joint_projector_test_1" type="revolute">
   <parent link="head" />
   <child link="link_projector_test_1" />
-  <origin xyz="0 0.23 0" rpy="0 1.57 0" />
-<!--
+  <origin xyz="0 0.23 0" rpy="0 0 0" />
   <axis xyz="0 1 0" />
   <limit effort="1000.0" upper="0.0001" lower="-0.0001" velocity="0.5" />
--->
 </joint>
 <!-- this works fine because it is attached to a revolute jointed link-->
 <link name="link_projector_test_1">
@@ -282,7 +280,8 @@
 
 <gazebo reference="link_projector_test_1">
   <projector name="projector_test_1">
-    <pose>0 0 0 0 0 0</pose>
+    <!-- setting the pose will produce glitches even when attached to a revolute joint -->
+    <pose>0 0 0 0 1.57 0</pose>
     <texture>test_pattern.png</texture>
     <!--texture>stereo_projection_pattern_high_res_red.png</texture-->
     <fov>0.95</fov>
