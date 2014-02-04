@@ -47,7 +47,7 @@
       </link>
 
       <link name="projector_link">
-        <pose>0 0 1 0.0 0.77 0.0</pose>
+        <pose>0 0 1 0.0 0.0 0.0</pose>
         <collision name="collision">
           <geometry>
             <sphere>
@@ -66,7 +66,7 @@
           </material>
         </visual>
         <projector name="texture_projector">
-          <pose>0 0 0 0 0.0 0</pose>
+          <pose>0 0 0 0 0.77 0</pose>
         <!-- set GAZEBO_RESOURCE_PATH to point to this (have it within media/materials/textures subdir  -->
         <texture>test_pattern.png</texture>
         <!-- this works because it is in /usr/share/gazebo-1.9/media/materials/textures/ -->
