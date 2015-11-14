@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+
+  <group ns="nest">
+    <node name="wrap_shell_script" pkg="testbot_utils" type="wrap_shell_script.py" 
+        output="screen">
+      <param name="pkg" value="testbot_utils" />
+      <param name="script" value="test.sh" />
+      <param name="test_param" value="have_correct_namespace" />
+    </node>
+  </group>
+</launch>
