@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- http://answers.ros.org/question/219698/jade-xacro-macro-param-line-breaks-string-index-out-of-range/ -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find testbot_description)/urdf/param_test_linebreak.xacro'" />
+
+</launch>
