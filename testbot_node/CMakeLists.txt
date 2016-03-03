@@ -69,6 +69,12 @@ find_package(catkin REQUIRED COMPONENTS
 #   std_msgs  # Or other packages containing msgs
 # )
 
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  add_rostest_gtest(int_feedback launch/int_node.launch test/int_feedback.cpp)
+  target_link_libraries(int_feedback ${catkin_LIBRARIES})
+endif()
+
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
 ################################################
