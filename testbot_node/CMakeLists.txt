@@ -6,6 +6,7 @@ project(testbot_node)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  std_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -126,16 +127,16 @@ include_directories(
 # add_dependencies(testbot_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(testbot_node_node src/testbot_node_node.cpp)
+add_executable(int_node src/int_node.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(testbot_node_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(testbot_node_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(int_node
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
