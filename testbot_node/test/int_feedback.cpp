@@ -30,17 +30,13 @@ TEST_F(IntNodeTest, feedbackCorrect)
   std_msgs::Int32 msg;
   msg.data = 10;
   sub_ = nh_.subscribe("out", 1, &IntNodeTest::intCallback, dynamic_cast<IntNodeTest*>(this));
-  ros::spinOnce();
-  ros::Duration(2).sleep();
 
-  // for (size_t i = 0; i < 10; ++i)
+  while (ros::ok())
   {
-    pub_.publish(msg);
     ros::spinOnce();
-    ros::Duration(2).sleep();
+    ros::Duration(1).sleep();
+    pub_.publish(msg);
   }
-
-  ros::spin();
 
   EXPECT_EQ(msg.data + 17, response_);
 }
