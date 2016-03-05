@@ -3,5 +3,6 @@
   <node name="int_node" pkg="testbot_node" type="int_node"
       output="screen">
   </node>
-  <test test-name="int_feedback" pkg="testbot_node" type="int_feedback" />
+  <!--test test-name="int_feedback_t" pkg="testbot_node" type="int_feedback" /-->
+  <test test-name="int_feedback_t" pkg="testbot_node" type="testbot_node-test" />
 </launch>

@@ -6,6 +6,7 @@ project(testbot_node)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  rostest
   std_msgs
 )
 
@@ -68,12 +69,6 @@ find_package(catkin REQUIRED COMPONENTS
 #   DEPENDENCIES
 #   std_msgs  # Or other packages containing msgs
 # )
-
-if(CATKIN_ENABLE_TESTING)
-  find_package(rostest REQUIRED)
-  add_rostest_gtest(int_feedback launch/int_node.launch test/int_feedback.cpp)
-  target_link_libraries(int_feedback ${catkin_LIBRARIES})
-endif()
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -183,11 +178,19 @@ target_link_libraries(int_node
 ## Testing ##
 #############
 
-## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_testbot_node.cpp)
-# if(TARGET ${PROJECT_NAME}-test)
-#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
+# if(CATKIN_ENABLE_TESTING)
+#   find_package(rostest REQUIRED)
+#   add_rostest_gtest(int_feedback launch/int_node.launch test/int_feedback.cpp)
+#   target_link_libraries(int_feedback ${catkin_LIBRARIES})
 # endif()
+
+find_package(gtest)
+## Add gtest based cpp test target and link libraries
+# catkin_add_gtest(${PROJECT_NAME}-test test/int_feedback.cpp)
+add_rostest_gtest(${PROJECT_NAME}-test launch/int_node.launch test/int_feedback.cpp)
+if(TARGET ${PROJECT_NAME}-test)
+  target_link_libraries(${PROJECT_NAME}-test ${catkin_LIBRARIES} ${GTEST_LIBRARIES})
+endif()
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
