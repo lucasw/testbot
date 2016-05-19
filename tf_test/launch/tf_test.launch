@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find tf_test)/urdf/tf_test.xacro'"/>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="true"/>
+  </node>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  <node name="tf_test" pkg="tf_test" type="tf_test.py"
+      output="screen">
+    <param name="parent" value="map"/>
+    <param name="child" value="test_link"/>
+  </node>
+  <node name="tf_echo" pkg="tf" type="tf_echo"
+      output="screen"
+      args="test_link map"/>
+</launch>
