@@ -4,14 +4,23 @@
 <link name="map">
 </link>
 
+<link name="link1">
+</link>
+
+<joint name="joint1" type="fixed">
+  <parent link="map"/>
+  <child link="link1"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
 <link name="test_link">
 </link>
 
 <joint name="test_joint" type="revolute">
-  <parent link="map"/>
+  <parent link="link1"/>
   <child link="test_link"/>
   <origin xyz="0 0 0" rpy="0 0 0"/>
-  <axis xyz="0 0 1" />
+  <axis xyz="0 0 1"/>
   <limit effort="5000" lower="-0.5" upper="0.5" velocity="50"/>
 </joint>
 
