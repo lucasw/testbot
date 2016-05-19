@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find tf_test)/urdf/tf_test.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find tf_test)/urdf/tf_test.xacro'"/>
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <param name="use_gui" value="false"/>
     <rosparam param="source_list">
@@ -9,6 +9,12 @@
   </node>
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
   <node name="tf_test" pkg="tf_test" type="tf_test.py"
+      output="screen"
+      if="false">
+    <param name="parent" value="map"/>
+    <param name="child" value="test_link"/>
+  </node>
+  <node name="tf2_test" pkg="tf_test" type="tf2_test.py"
       output="screen">
     <param name="parent" value="map"/>
     <param name="child" value="test_link"/>

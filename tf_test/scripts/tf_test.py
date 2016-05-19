@@ -44,6 +44,7 @@ while not rospy.is_shutdown():
         old_pos = pos
         old_time = cur_time
 
+    # https://github.com/ros/geometry/issues/117
     try:
         pos, quat = tl.lookupTransform(child, parent, rospy.Time())
     except tf.LookupException as e:

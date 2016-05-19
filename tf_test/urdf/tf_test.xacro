@@ -8,9 +8,20 @@
 </link>
 
 <joint name="joint1" type="fixed">
-  <parent link="map"/>
+  <parent link="link2"/>
   <child link="link1"/>
   <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
+
+<link name="link2">
+</link>
+
+<joint name="joint2" type="revolute">
+  <parent link="map"/>
+  <child link="link2"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <axis xyz="0 0 1"/>
+  <limit effort="5000" lower="-0.5" upper="0.5" velocity="50"/>
 </joint>
 
 <link name="test_link">
